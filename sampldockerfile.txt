@@ -1,0 +1,32 @@
+#Start with base image
+FROM ubuntu
+
+#Install libraries & packages
+RUN apt-get update && apt-get install -y
+\
+python-pip \
+python-dev \
+python-numpy \
+python-scipy \
+python-pip
+
+RUN pip install scikit-learn flask-
+restful
+
+#Copy model code from current directory
+COPY . /model
+
+#Expose the port for the API
+EXPOSE 8100
+
+#set environment variables
+ENV ml_debug_level=1
+ENV environment PRODUCTION
+
+#run the API
+CMD ["python", "/model/
+classify_iris.py"]
+
+
+
+
